@@ -1,0 +1,17 @@
+{
+  "name": "shoppingList",
+  "displayName": "shoppingList",
+  "expo": {
+    "name": "shoppingList",
+    "slug": "shoppingList",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
