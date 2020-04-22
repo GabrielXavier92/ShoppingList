@@ -12,6 +12,10 @@
     ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.casinhafeliz.shoppingList",
+      "versionCode": 1
+    }
   }
 }

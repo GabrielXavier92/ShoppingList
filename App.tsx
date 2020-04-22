@@ -1,19 +1,41 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import 'react-native-gesture-handler';
+
+import { Root } from "native-base";
+import { AppLoading } from 'expo';
+
+import * as Font from 'expo-font';
+
+import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { ApolloProvider } from "@apollo/react-hooks";
+
+import { client } from "./src/config/apolloServer";
+import { Routes } from "./src/routes";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+  const [isReady, setIsReady] = useState(false);
+  
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    setIsReady(true);
+  }
+
+
+  useEffect(() => { loadFonts() }, [])
+  
+  if (!isReady) return <AppLoading />
+  if (isReady) return (
+    <Root>
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </ApolloProvider>
+    </Root>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
