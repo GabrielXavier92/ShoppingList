@@ -1,8 +1,11 @@
 import React from 'react';
-import { List, Text, View, Container, Fab, ListItem, Body, Right, Left } from 'native-base';
+import { List, Text, View, Container, Fab, ListItem, Body, Right, Left, Button, Content, Toast } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
+import { useMutation } from "@apollo/react-hooks";
 import { useNavigation } from '@react-navigation/native';
+
+import gql from "graphql-tag";
 
 interface IProduct { 
   id: string,
@@ -17,8 +20,44 @@ interface IProductList {
   shopping_list_id: string,
 }
 
+
+const DELETE_PRODUCT = gql`
+mutation ($id: uuid!) {
+  delete_product(where: {id: {_eq: $id}}) {
+    affected_rows
+  }
+}
+`
+
 const ProductList: React.FC<IProductList> = ({ products, shopping_list_id }) => {
   const navigation = useNavigation()
+  
+  const [deleteProduct, { loading, error }] = useMutation(DELETE_PRODUCT, {
+    onCompleted: () => handleSuccess(),
+    onError: () => handleError()
+  })
+
+  const handleSuccess = () => {
+    Toast.show({
+      text: "Produto deletado com sucesso",
+      position: "bottom",
+      type: "success",
+      duration: 2000
+    })
+  }
+
+  const handleError = () => {
+    Toast.show({
+      text: "Erro ao deletar produto",
+      position: "bottom",
+      type: "danger",
+      duration: 2000
+    })
+  }
+
+  const handleDeleteProduct = (productId: string) => {
+    deleteProduct({variables: { id: productId }})
+  }
 
   return (
     <Container>
@@ -32,11 +71,14 @@ const ProductList: React.FC<IProductList> = ({ products, shopping_list_id }) => 
               <Left>
                 <Text>{item.name}</Text>
               </Left>
-              <Body>
+              <Body style={{display: 'flex', flexDirection: 'row'}}>
                 <Text>Qt. {item.ammount}</Text>
+                <Text>R$ {item.price}</Text>
               </Body>
               <Right>
-                <Text>R$ {item.price}</Text>
+                <Button onPress={() => { handleDeleteProduct(item.id) }} small danger style={{ width: 40, justifyContent: 'center' }}>
+                  <Ionicons name='md-trash' size={20} color={'white'} />
+                </Button>
               </Right>
             </ListItem>
           ))}
