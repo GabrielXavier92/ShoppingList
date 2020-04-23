@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 
 import gql from "graphql-tag";
+
 import { RootStackParamList } from "../../routes";
 
 const INSERT_PRODUCT = gql`
@@ -30,8 +31,8 @@ const ProductForm = () => {
   const navigation = useNavigation()
 
   const [name, setName] = useState('')
-  const [ammount, setAmmount] = useState(0)
-  const [price, setPrice] = useState(0)
+  const [ammount, setAmmount] = useState(0.0)
+  const [price, setPrice] = useState(0.0)
 
   const handlePopualteForm = () => {
     if (route.params!.item) {
@@ -114,6 +115,7 @@ const ProductForm = () => {
               onChange={value => { setAmmount(value) }}
               totalHeight={45}
               minValue={0}
+              valueType={'real'}
             />
           </Item>
           <Item style={{ paddingVertical: 5, justifyContent: 'space-between' }}>
