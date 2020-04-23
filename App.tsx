@@ -18,13 +18,13 @@ export default function App() {
   
   const loadFonts = async () => {
     await Font.loadAsync({
+      ...Ionicons.font,
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
     });
+    await Ionicons.loadFont()
     setIsReady(true);
   }
-
 
   useEffect(() => { loadFonts() }, [])
   

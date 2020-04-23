@@ -3,7 +3,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "web": "expo start --web",
+    "web": "expo start",
     "start": "react-native start",
     "test": "jest",
     "buildAndroid": "expo build:android "
@@ -17,9 +17,9 @@
     "apollo-client": "^2.6.8",
     "apollo-link-http": "^1.5.17",
     "apollo-link-ws": "^1.0.20",
-    "expo": "~37.0.3",
+    "expo": "37.0.3",
     "expo-constants": "^9.0.0",
-    "expo-font": "^8.1.1",
+    "expo-font": "8.1.1",
     "expo-updates": "~0.1.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
@@ -35,7 +35,6 @@
     "react-native-screens": "2.2.0",
     "react-native-swipe-list-view": "^2.5.0",
     "react-native-unimodules": "~0.9.0",
-    "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7",
     "subscriptions-transport-ws": "^0.9.16"
   },
