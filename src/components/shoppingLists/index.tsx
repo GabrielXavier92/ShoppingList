@@ -47,7 +47,6 @@ const ShoppingList = () => {
               </Body>
               <Right>
                 <Ionicons name="md-arrow-round-forward" size={20} />
-                <Ionicons name="md-code-working" size={20} />
               </Right>
             </ListItem>
           ))}
